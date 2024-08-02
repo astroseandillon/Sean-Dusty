@@ -10,50 +10,28 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
+def nk_unit_checker(filename):
+    with open(filename) as file:
+        contents=file.read()
+        if 'micron' in contents:
+            wavelen, n_dust, k_dust = np.loadtxt(filename, skiprows=7, unpack=True)
+        elif '1/cm' in contents:
+            wavelen, n_dust, k_dust = np.loadtxt(filename, skiprows=7, unpack=True)
+            for i in range(len(wavelen)):
+                wavelen[i] = (wavelen[i]**(-1) * 1e5)
+    file.close()
+    return wavelen, n_dust, k_dust
 
 
-# lam_dust1, cabs_dust1, csca_dust1 = np.loadtxt('grph1-dlspheres.dat', unpack=True, skiprows=1)
-# lam_dust2, cabs_dust2, csca_dust2 = np.loadtxt('sil-dleespheres.dat', unpack=True, skiprows=1)
+dust_dir = "C:/UTSA/Research/DUSTY/DUSTY/Lib_nk/"
 
-
-
-# terp = np.interp(lam_dust1, lam_dust2, cabs_dust2)
-
-
-
-
-
-dustlist = [('grph1-dl.nk', 'spheres'), ('sil-dlee.nk', 'CDE'), ('FeO.nk', 'CDE2')]
-namelist = [dustlist[j][0][:-3]+dustlist[j][1]+'.dat' for j in range(len(dustlist))]
-weightlist = [1.0, 200.0, 10.0]
-# lam_max, cabs_max, csca_max = np.loadtxt(max(namelist, key=os.path.getsize), unpack=True)
-lam_final = np.geomspace(0.2, 500, num=500)
-# terp = np.interp(lam_final, lam_max, cabs_max)
-
-total_array = np.ndarray((3,len(lam_final),len(dustlist)))
-total_array[:,:,0] = lam_final
-# total_array[0,:,1] = cabs_max
-# total_array[0,:,2] = csca_max
-# for h in range(len(namelist)):
-
-
-# for k in range(len(namelist)):
-#     lam, cabs, csca = np.loadtxt(namelist[k], unpack=True)
-#     total_array[k,:,1] = np.interp(lam_final, lam, cabs)
-#     total_array[k,:,2] = np.interp(lam_final, lam, csca)
-
-
-avg_array = np.ndarray((len(lam_final),3))
-avg_array[:,0] = lam_final
-for j in range(len(lam_final)):
-    avg_array[j,1] = np.average(total_array[:,j,1], weights=weightlist)
-    avg_array[j,2] = np.average(total_array[:,j,2], weights=weightlist)
-
-titlestring=''
-for g in range(len(namelist)):
-    titlestring += namelist[g][:3] + str(weightlist[g]).replace('.','')
-
-
+dustlist = [('oliv_nk_x.nk', 'spheres')]
+for j in range(len(dustlist)):
+    pathy = os.path.join(dust_dir, dustlist[j][0])
+    print(pathy)
+    wavelen, n_dust, k_dust = np.loadtxt(pathy, skiprows=7, unpack=True)
+    wavelen2, n_dust2, k_dust2 = nk_unit_checker(pathy)
+    
 '''
 fig, ax = plt.subplots()
 
