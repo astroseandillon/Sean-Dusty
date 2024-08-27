@@ -1,4 +1,6 @@
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 # %% [markdown]
 # # Calculating the absorption and scattering cross section using a probability distribution
 
@@ -401,6 +403,7 @@ root.mainloop()
  
 # %%
 =======
+>>>>>>> a22e56b827048ff2b5de9eebab615037f9ff6085
 # %% [markdown]
 # # Calculating the absorption and scattering cross section using a probability distribution
 
@@ -602,7 +605,11 @@ def run_program():
 
     for j in range(len(dustlist)):
         pathy = os.path.join(nk_path, dustlist[j][0]) #pipeline is open
+<<<<<<< HEAD
+        wavelen, n_dust, k_dust = np.loadtxt(pathy, skiprows=8, unpack=True)
+=======
         wavelen, n_dust, k_dust = np.loadtxt(pathy, skiprows=9, unpack=True)
+>>>>>>> a22e56b827048ff2b5de9eebab615037f9ff6085
         m = np.array([complex(n_dust[i], k_dust[i]) for i in range(len(wavelen))])
         cab = cabs(m, dustlist[j][1], bounds_l2, bounds_l1)
         Cabs_array = np.array((cab))
@@ -731,4 +738,7 @@ tk.Button(root, text="Run Program", command=run_program).grid(row=6, column=1)
 root.mainloop()
 
 
+<<<<<<< HEAD
+=======
 >>>>>>> f13452138115bd6a37df581f9fa02d535e8ca252
+>>>>>>> a22e56b827048ff2b5de9eebab615037f9ff6085
