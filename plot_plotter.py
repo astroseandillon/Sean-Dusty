@@ -20,9 +20,9 @@ plt.close('all')
 # x5, y5, z5 = np.loadtxt('ism.dat', skiprows=3, unpack=True)
 
 x5, y5 = np.loadtxt('cde1_fab01_fig7_olivine.csv', delimiter=',', skiprows=1, unpack=True)
-x6, y6, z6 = np.loadtxt('ISM_std_jumbalaya.dat', unpack=True)
+# x6, y6, z6 = np.loadtxt('ISM_std_jumbalaya.dat', unpack=True)
 
-k6 = y6/3.227383793642055e-05
+# k6 = y6/3.227383793642055e-05
 title = 'Benchmark: CDE Comparison of Olivine'
 
 
@@ -38,7 +38,7 @@ ax.set_ylabel(r'$C_{abs}$', fontsize=14)
 # ax.plot(x4, y4, label='spheres')
 ax.plot(x5, y5,'.', label='Fabian 2001')
 # ax.plot(x6, y6, label='Dillon 2024')
-ax.plot(x6, k6, label='Dillon 2024 kappa')
+# ax.plot(x6, k6, label='Dillon 2024 kappa')
 
 ax.legend()
 
