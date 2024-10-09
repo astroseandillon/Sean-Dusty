@@ -9,13 +9,14 @@ Created on Mon Sep 23 10:17:26 2024
 import os
 import numpy as np
 import scipy.integrate as spit
+import matplotlib.pyplot as plt
 dust_dir = ['/home/physics/Research/DUSTY/DUSTY/Lib_nk/', 
             "C:/UTSA/Research/DUSTY/DUSTY/Lib_nk/",
            "C:/Users/uhe082/OneDrive - University of Texas at San Antonio/Lib_nk"]
 # this is the possible locations of where dust can be
 
 
-nk_path = dust_dir[1]               #where the dust is 
+nk_path = dust_dir[2]               #where the dust is 
 def bounds_l1():
     return [0,1]
 
@@ -139,21 +140,30 @@ weightlist = [1.0, 1.0, 1.0]
 
 for j in range(len(dustlist)):
     pathy = os.path.join(nk_path, dustlist[j][0]) #pipeline is open
+    print(pathy)
     wavelen, n_dust, k_dust = np.loadtxt(pathy, skiprows=7, unpack=True)
+    print(wavelen[0], ' ', n_dust[0], ' ', k_dust[0])
     m = np.array([complex(n_dust[i], k_dust[i]) for i in range(len(wavelen))])
+    print(m[0])
     cab = cabs(m, dustlist[j][1], bounds_l2, bounds_l1)
+    print('cab ',cab[0])
     Cabs_array = np.array((cab))
+    print('cab array ', Cabs_array[0])
     Cabs_array *= (2 * np.pi / (wavelen)) * v_avg
+    print('cab array 2pi/wavelength', Cabs_array[0])
     sig = np.array((sigma(m, wavelen, v_avg)))
+    print('sigma ',sig[0])
     Csca_array = Cabs_array/sig
+    print('csca ',Csca_array[0])
     output = np.transpose((wavelen, Cabs_array, Csca_array))
+    print('output ',output[0])
     f = open(dustlist[j][0][:-3]+dustlist[j][1]+'.dat', 'w')
     for i in range(len(output)):
         f.write(f"{output[i,0]} \t {output[i,1]} \t {output[i,2]}\n")
     f.close()
+    print('done with dust: ', pathy)
 
-
-lam_final = np.geomspace(0.2, 500, num=500)
+lam_final = np.geomspace(2, 500, num=500)
 total_array = np.ndarray((3,len(lam_final),len(dustlist)))
 total_array[:,:,0] = lam_final
 
