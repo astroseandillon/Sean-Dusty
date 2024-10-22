@@ -16,7 +16,7 @@ dust_dir = ['/home/physics/Research/DUSTY/DUSTY/Lib_nk/',
 # this is the possible locations of where dust can be
 
 
-nk_path = dust_dir[2]               #where the dust is 
+nk_path = dust_dir[1]               #where the dust is 
 def bounds_l1():
     return [0,1]
 
@@ -97,7 +97,7 @@ def cabs(m, dis_name, bounds_l2, bounds_l1):
             cabs.append(np.imag(3*(m[j]**2 - 1)/(m[j]**2 + 2)))
     else:
         for j in range(len(m)):
-            def f(l1, l2, n=m[j], dis_name='CDE'):
+            def f(l1, l2, n=m[j], dis_name=dis_name):
                 b = 1/(n**2 - 1)
                 term1 = 1/3 * 1/(b + l1)
                 term2 = 1/3 * 1/(b + l2)
@@ -130,9 +130,9 @@ def cabs_all(dustlist):
 
 
 
-dustlist = [('oliv_nk_x.nk', 'spheres'), 
-            ('oliv_nk_y.nk', 'spheres'), 
-            ('oliv_nk_z.nk', 'spheres')]
+dustlist = [('oliv_nk_x.nk', 'CDE'), 
+            ('oliv_nk_y.nk', 'CDE'), 
+            ('oliv_nk_z.nk', 'CDE')]
 
 namelist = [dustlist[j][0][:-3]+dustlist[j][1]+'.dat' for j in range(len(dustlist))]
 
@@ -140,15 +140,15 @@ weightlist = [1.0, 1.0, 1.0]
 
 for j in range(len(dustlist)):
     pathy = os.path.join(nk_path, dustlist[j][0]) #pipeline is open
-    print(pathy)
+    print('path = ',pathy)
     wavelen, n_dust, k_dust = np.loadtxt(pathy, skiprows=7, unpack=True)
     print(wavelen[0], ' ', n_dust[0], ' ', k_dust[0])
     m = np.array([complex(n_dust[i], k_dust[i]) for i in range(len(wavelen))])
-    print(m[0])
+    print('m = ',m[0])
     cab = cabs(m, dustlist[j][1], bounds_l2, bounds_l1)
     print('cab ',cab[0])
     Cabs_array = np.array((cab))
-    print('cab array ', Cabs_array[0])
+    print('cab array ', Cabs_array[0], ' of shape ', Cabs_array.shape)
     Cabs_array *= (2 * np.pi / (wavelen)) * v_avg
     print('cab array 2pi/wavelength', Cabs_array[0])
     sig = np.array((sigma(m, wavelen, v_avg)))
