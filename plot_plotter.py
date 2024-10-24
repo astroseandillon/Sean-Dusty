@@ -23,7 +23,7 @@ x5, y5 = np.loadtxt('cde1_fab01_fig7_olivine.csv', delimiter=',', skiprows=1, un
 # x6, y6, z6 = np.loadtxt('ISM_std_jumbalaya.dat', unpack=True)
 rho = 3.33e-4 # density in g um**-3
 v_avg = 3.227383793642055e-05
-k4 = y4/(v_avg * rho) * 1e2
+k4 = y4/(v_avg * rho) * 1e-8
 
 
 
@@ -40,7 +40,7 @@ ax.plot(x1, y1, label='oliv z CDE')
 ax.plot(x2, y2, label='oliv y CDE')
 ax.plot(x3, y3, label='oliv x CDE')
 ax.plot(x4, k4, label='total array')
-# ax.plot(x5, y5,'.', label='Fabian 2001')
+ax.plot(x5, y5,'.', label='Fabian 2001')
 # ax.plot(x6, y6, label='Dillon 2024')
 # ax.plot(x6, k6, label='Dillon 2024 kappa')
 
