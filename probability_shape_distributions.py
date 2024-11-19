@@ -103,28 +103,28 @@ def cabs(m, dis_name, bounds_l2, bounds_l1):
                 term2 = 1/3 * 1/(b + l2)
                 term3 = 1/3 * 1/(b + 1 - l1 - l2)
             # r = np.real((term1 + term2 + term3)*probability(dis_name, l1, l2))
-                j = np.imag((term1 + term2 + term3)*probability(dis_name, l1, l2))
-                return j
+                q = np.imag((term1 + term2 + term3)*probability(dis_name, l1, l2))
+                return q
             # return np.real((term1 + term2 + term3)*probability(dis_name, l1, l2)) + np.imag((term1 + term2 + term3)*probability(dis_name, l1, l2))
             cabs.append(spit.nquad(f, [bounds_l2, bounds_l1])[0])
     return cabs
 
 
-def cabs_all(dustlist):
-    for j in range(len(dustlist)):
-        pathy = os.path.join(nk_path, dustlist[j][0]) #pipeline is open
-        wavelen, n_dust, k_dust = np.loadtxt(pathy, skiprows=7, unpack=True)
-        m = np.array([complex(n_dust[i], k_dust[i]) for i in range(len(wavelen))])
-        cab = cabs(m, dustlist[j][1], bounds_l2, bounds_l1)
-        Cabs_array = np.array((cab))
-        Cabs_array *= (2 * np.pi / (wavelen)) * v_avg
-        sig = np.array((sigma(m, wavelen, v_avg)))
-        Csca_array = Cabs_array/sig
-        output = np.transpose((wavelen, Cabs_array, Csca_array))
-        f = open(dustlist[j][0][:-3]+dustlist[j][1]+'.dat', 'w')
-        for i in range(len(output)):
-            f.write(f"{output[i,0]} \t {output[i,1]} \t {output[i,2]}\n")
-        f.close()
+# def cabs_all(dustlist):
+#     for j in range(len(dustlist)):
+#         pathy = os.path.join(nk_path, dustlist[j][0]) #pipeline is open
+#         wavelen, n_dust, k_dust = np.loadtxt(pathy, skiprows=7, unpack=True)
+#         m = np.array([complex(n_dust[i], k_dust[i]) for i in range(len(wavelen))])
+#         cab = cabs(m, dustlist[j][1], bounds_l2, bounds_l1)
+#         Cabs_array = np.array((cab))
+#         Cabs_array *= (2 * np.pi / (wavelen)) * v_avg
+#         sig = np.array((sigma(m, wavelen, v_avg)))
+#         Csca_array = Cabs_array/sig
+#         output = np.transpose((wavelen, Cabs_array, Csca_array))
+#         f = open(dustlist[j][0][:-3]+dustlist[j][1]+'.dat', 'w')
+#         for i in range(len(output)):
+#             f.write(f"{output[i,0]} \t {output[i,1]} \t {output[i,2]}\n")
+#         f.close()
 
 
 
@@ -141,7 +141,8 @@ weightlist = [1.0, 1.0, 1.0]
 for j in range(len(dustlist)):
     pathy = os.path.join(nk_path, dustlist[j][0]) #pipeline is open
     print('path = ',pathy)
-    wavelen, n_dust, k_dust = np.loadtxt(pathy, skiprows=7, unpack=True)
+    wavenum, n_dust, k_dust = np.loadtxt(pathy, skiprows=7, unpack=True)
+    wavelen = 1e4/wavenum
     print(wavelen[0], ' ', n_dust[0], ' ', k_dust[0])
     m = np.array([complex(n_dust[i], k_dust[i]) for i in range(len(wavelen))])
     print('m = ',m[0])
@@ -163,7 +164,8 @@ for j in range(len(dustlist)):
     f.close()
     print('done with dust: ', pathy)
 
-lam_final = np.geomspace(2, 500, num=500)
+# lam_final = np.geomspace(2, 500, num=500)
+lam_final=wavelen
 total_array = np.ndarray((3,len(lam_final),len(dustlist)))
 total_array[:,:,0] = lam_final
 
