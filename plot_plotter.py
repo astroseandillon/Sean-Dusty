@@ -25,16 +25,6 @@ x5, y5 = np.loadtxt('cde1_fab01_fig7_olivine.csv', delimiter=',', skiprows=1, un
 # x6, y6, z6 = np.loadtxt('ISM_std_jumbalaya.dat', unpack=True)
 rho = 3.33e-4 # density in g um**-3
 v_avg = 3.227383793642055e-05
-<<<<<<< HEAD
-k1 = y1/(v_avg * rho) 
-k2 = y2/(v_avg * rho) 
-k3 = y3/(v_avg * rho) 
-k4 = y4/(v_avg * rho) 
-
-=======
-k4 = y4/(v_avg * rho) * 1e-8
->>>>>>> df6c6e50a3c904745fd101cf1fad2f48bd9a0279
-
 
 
 title = 'Benchmark: CDE Comparison of Olivine'
