@@ -16,7 +16,7 @@ dust_dir = ['/home/physics/Research/DUSTY/DUSTY/Lib_nk/',
 # this is the possible locations of where dust can be
 
 
-nk_path = dust_dir[1]               #where the dust is 
+nk_path = dust_dir[2]               #where the dust is 
 def bounds_l1():
     return [0,1]
 

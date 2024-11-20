@@ -25,11 +25,15 @@ x5, y5 = np.loadtxt('cde1_fab01_fig7_olivine.csv', delimiter=',', skiprows=1, un
 # x6, y6, z6 = np.loadtxt('ISM_std_jumbalaya.dat', unpack=True)
 rho = 3.33e-4 # density in g um**-3
 v_avg = 3.227383793642055e-05
+<<<<<<< HEAD
 k1 = y1/(v_avg * rho) 
 k2 = y2/(v_avg * rho) 
 k3 = y3/(v_avg * rho) 
 k4 = y4/(v_avg * rho) 
 
+=======
+k4 = y4/(v_avg * rho) * 1e-8
+>>>>>>> df6c6e50a3c904745fd101cf1fad2f48bd9a0279
 
 
 
@@ -57,6 +61,7 @@ fig,ax = plt.subplots()
 ax.set(xscale='linear', yscale='log')# xlim=(100,500), ylim=(1e-9,1e-5))
 ax.set_title(title, fontsize=16)
 ax.set_xlabel(r'$\lambda (\mu m)$', fontsize=14)
+<<<<<<< HEAD
 ax.set_ylabel(r'$\kappa$', fontsize=14)
 ax.set_xlim(12,50)
 ax.set_ylim(10,10000)
@@ -64,6 +69,14 @@ ax.set_ylim(10,10000)
 # ax.plot(x2, k2, label='oliv y CDE')
 # ax.plot(x3, k3, label='oliv x CDE')
 ax.plot(x1, k4, label='total array')
+=======
+ax.set_ylabel(r'$C_{abs}$', fontsize=14)
+
+ax.plot(x1, y1, label='oliv z CDE')
+ax.plot(x2, y2, label='oliv y CDE')
+ax.plot(x3, y3, label='oliv x CDE')
+ax.plot(x4, k4, label='total array')
+>>>>>>> df6c6e50a3c904745fd101cf1fad2f48bd9a0279
 ax.plot(x5, y5,'.', label='Fabian 2001')
 # ax.plot(x6, y6, label='Dillon 2024')
 # ax.plot(x6, k6, label='Dillon 2024 kappa')
