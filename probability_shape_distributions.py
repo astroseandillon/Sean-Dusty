@@ -16,7 +16,7 @@ dust_dir = ['/home/physics/Research/DUSTY/DUSTY/Lib_nk/',
 # this is the possible locations of where dust can be
 
 
-nk_path = dust_dir[2]               #where the dust is 
+nk_path = dust_dir[1]               #where the dust is 
 def bounds_l1():
     return [0,1]
 
@@ -130,9 +130,9 @@ def cabs(m, dis_name, bounds_l2, bounds_l1):
 
 
 
-dustlist = [('oliv_nk_x.nk', 'CDE'), 
-            ('oliv_nk_y.nk', 'CDE'), 
-            ('oliv_nk_z.nk', 'CDE')]
+dustlist = [('oliv_nk_x.nk', 'CDE2'), 
+            ('oliv_nk_y.nk', 'CDE2'), 
+            ('oliv_nk_z.nk', 'CDE2')]
 
 namelist = [dustlist[j][0][:-3]+dustlist[j][1]+'.dat' for j in range(len(dustlist))]
 
