@@ -13,21 +13,21 @@ plt.close('all')
 
 
 
-x1, y1, z1 = np.loadtxt('oliv_nk_zCDE2.dat', unpack=True)
-x2, y2, z2 = np.loadtxt('oliv_nk_yCDE2.dat', unpack=True)
-x3, y3, z3 = np.loadtxt('oliv_nk_xCDE2.dat', unpack=True)
-y4 = np.average((y1,y2[:-1],y3[:-2]),axis=0)
+x1, y1, z1 = np.loadtxt('ism-stnd.dat', unpack=True,skiprows=3)
+x2, y2, z2 = np.loadtxt('sil530grp3132grp1566.dat', unpack=True)
+# x3, y3, z3 = np.loadtxt('oliv_nk_xCDE2.dat', unpack=True)
+# y4 = np.average((y1,y2[:-1],y3[:-2]),axis=0)
 
 # x4, y4, z4 = np.loadtxt('oli10oli10oli10.dat', unpack=True)
 # x5, y5, z5 = np.loadtxt('ism.dat', skiprows=3, unpack=True)
 
-x5, y5 = np.loadtxt('cde2_fab01_fig7_olivine_8_13.csv', delimiter=',', skiprows=1, unpack=True)
+# x5, y5 = np.loadtxt('cde2_fab01_fig7_olivine_8_13.csv', delimiter=',', skiprows=1, unpack=True)
 # x6, y6, z6 = np.loadtxt('ISM_std_jumbalaya.dat', unpack=True)
 rho = 3.33e-4 # density in g um**-3
 v_avg = 3.227383793642055e-05
 
 
-title = 'Benchmark: CDE2 Comparison of Olivine'
+title = 'Benchmark: ISM_std'
 # x1=1e4/x1
 # x2=1e4/x2
 # x3=1e4/x3
@@ -53,14 +53,14 @@ ax.set_title(title, fontsize=16)
 ax.set_xlabel(r'$\lambda (\mu m)$', fontsize=14)
 
 ax.set_ylabel(r'$\kappa$', fontsize=14)
-ax.set_xlim(8,13)
-ax.set_ylim(10,10000)
+ax.set_xlim(-1,100)
+ax.set_ylim(0.0001,100)
 # ax.plot(x1, k1, label='oliv z CDE')
 # ax.plot(x2, k2, label='oliv y CDE')
 # ax.plot(x3, k3, label='oliv x CDE')
-ax.plot(x1, y4*1e8, label='total array CDE2')
+ax.plot(x1, y1, label='ISM_std')
 
-ax.plot(x5, y5,'.', label='Fabian CDE2 2001')
+ax.plot(x2, y2/v_avg,'.', label='new')
 # ax.plot(x6, y6, label='Dillon 2024')
 # ax.plot(x6, k6, label='Dillon 2024 kappa')
 

@@ -130,19 +130,54 @@ def cabs(m, dis_name, bounds_l2, bounds_l1):
 
 
 
-dustlist = [('oliv_nk_x.nk', 'CDE2'), 
-            ('oliv_nk_y.nk', 'CDE2'), 
-            ('oliv_nk_z.nk', 'CDE2')]
+dustlist = [('sil-dlee.nk', 'spheres'), 
+            ('grph1-dl.nk', 'spheres'), 
+            ('grph2-dl.nk', 'spheres')]
 
 namelist = [dustlist[j][0][:-3]+dustlist[j][1]+'.dat' for j in range(len(dustlist))]
 
-weightlist = [1.0, 1.0, 1.0]
+weightlist = [53.0, 31.32, 15.66]
+# do the regridding BEFORE calculating Cabs and csca!!!!!
+
+lam_final = np.geomspace(0.001, 1000, num=1200)
+# lam_final=wavelen
+
+
+regriddust = np.ndarray((len(lam_final), 3))
+
+total_array = np.ndarray((3,len(lam_final),len(dustlist)))
+total_array[:,:,0] = lam_final
+
+for k in range(len(namelist)):
+    lam, cabs_tot, csca_tot = np.loadtxt(namelist[k], unpack=True)
+    total_array[k,:,1] = np.interp(lam_final, lam, cabs_tot)
+    total_array[k,:,2] = np.interp(lam_final, lam, csca_tot)
+    h = open('tot array {}.txt'.format(k), 'w')
+    for b in range(len(lam_final)):
+        h.write(f"{total_array[k,b,0]} \t {total_array[k,b,1]} \t {total_array[k,b,2]} \n ")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 for j in range(len(dustlist)):
     pathy = os.path.join(nk_path, dustlist[j][0]) #pipeline is open
     print('path = ',pathy)
-    wavenum, n_dust, k_dust = np.loadtxt(pathy, skiprows=7, unpack=True)
-    wavelen = 1e4/wavenum
+    wavelen, n_dust, k_dust = np.loadtxt(pathy, skiprows=7, unpack=True)
+    # wavelen = 1e4/wavenum
     print(wavelen[0], ' ', n_dust[0], ' ', k_dust[0])
     m = np.array([complex(n_dust[i], k_dust[i]) for i in range(len(wavelen))])
     print('m = ',m[0])
@@ -164,8 +199,8 @@ for j in range(len(dustlist)):
     f.close()
     print('done with dust: ', pathy)
 
-# lam_final = np.geomspace(2, 500, num=500)
-lam_final=wavelen
+lam_final = np.geomspace(0.001, 1000, num=1200)
+# lam_final=wavelen
 total_array = np.ndarray((3,len(lam_final),len(dustlist)))
 total_array[:,:,0] = lam_final
 
