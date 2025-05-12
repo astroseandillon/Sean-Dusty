@@ -18,7 +18,7 @@ dust_dir = ['/home/physics/Research/DUSTY/DUSTY/Lib_nk/',
 # this is the possible locations of where dust can be
 
 
-nk_path = dust_dir[1]               #where the dust is 
+nk_path = dust_dir[0]               #where the dust is 
 
 # x1, y1, z1 = np.loadtxt('ism-stnd.dat', unpack=True,skiprows=3)
 # x2, y2, z2 = np.loadtxt('sil530grp3132grp1566.dat', unpack=True)
@@ -35,7 +35,7 @@ v_avg = 3.227383793642055e-05
 
 
 title = 'NK regridded'
-x1,n1,k1 = np.loadtxt(nk_path+'sil-dle_reg_0_05_1000_0.nk', unpack=True)
+# x1,n1,k1 = np.loadtxt(nk_path+'sil-dle_reg_0_05_1000_0.nk', unpack=True)
 
 x2,n2,k2 = np.loadtxt(nk_path+'sil-dlee.nk',unpack=True,skiprows=8)
 
@@ -76,10 +76,10 @@ ax[1].set_xlabel(r'Wavelength $(\mu m)$', fontsize=14)
 ax[0].set_ylabel('N')
 ax[1].set_ylabel('K')
 
-ax[0].plot(x1,n1,'^g', label='regridded')
+# ax[0].plot(x1,n1,'^g', label='regridded')
 ax[0].plot(x2,n2,'r', label='original')
 
-ax[1].plot(x1,k1,'^g', label='regridded')
+# ax[1].plot(x1,k1,'^g', label='regridded')
 ax[1].plot(x2,k2,'r', label='original')
 
 
