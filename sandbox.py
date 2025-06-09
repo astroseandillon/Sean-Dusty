@@ -35,6 +35,20 @@ plt.close('all')
 #     wavelen, n_dust, k_dust = np.loadtxt(pathy, skiprows=7, unpack=True)
 #     wavelen2, n_dust2, k_dust2 = nk_unit_checker(pathy)
     
+# lam_final = np.geomspace(0.001, 1000, num=1200)
+# # lam_final=wavelen
+# total_array = np.ndarray((3,len(lam_final),len(dustlist)))
+# total_array[:,:,0] = lam_final
+
+# for k in range(len(namelist)):
+#     lam, cabs_tot, csca_tot = np.loadtxt(namelist[k], unpack=True)
+#     total_array[k,:,1] = np.interp(lam_final, lam, cabs_tot)
+#     total_array[k,:,2] = np.interp(lam_final, lam, csca_tot)
+#     h = open('tot array {}.txt'.format(k), 'w')
+#     for b in range(len(lam_final)):
+#         h.write(f"{total_array[k,b,0]} \t {total_array[k,b,1]} \t {total_array[k,b,2]} \n ")
+
+# h.close()
 
 
 def regrid_nk(fname, lam_start, lam_end, datapoints, gridtype):
@@ -104,7 +118,6 @@ dustlist = [('sil-dlee.nk', 'spheres'),
             ('grph1-dl.nk', 'spheres'), 
             ('grph2-dl.nk', 'spheres')]
 
-for i in range(len(dustlist))
 
 # def kmh(r, a0):
 #     q = -3.5
@@ -119,6 +132,39 @@ for i in range(len(dustlist))
 
 # x = np.geomspace(0.005, 0.25, 100)
 
+
+# def cabs_all(dustlist):
+#     for j in range(len(dustlist)):
+#         pathy = os.path.join(nk_path, dustlist[j][0]) #pipeline is open
+#         wavelen, n_dust, k_dust = np.loadtxt(pathy, skiprows=7, unpack=True)
+#         m = np.array([complex(n_dust[i], k_dust[i]) for i in range(len(wavelen))])
+#         cab = cabs(m, dustlist[j][1], bounds_l2, bounds_l1)
+#         Cabs_array = np.array((cab))
+#         Cabs_array *= (2 * np.pi / (wavelen)) * v_avg
+#         sig = np.array((sigma(m, wavelen, v_avg)))
+#         Csca_array = Cabs_array/sig
+#         output = np.transpose((wavelen, Cabs_array, Csca_array))
+#         f = open(dustlist[j][0][:-3]+dustlist[j][1]+'.dat', 'w')
+#         for i in range(len(output)):
+#             f.write(f"{output[i,0]} \t {output[i,1]} \t {output[i,2]}\n")
+#         f.close()
+
+
+
+
+# for k in range(len(namelist)):
+#     '''
+#     Here is where we regrid our arrays. 
+#     '''
+#     lam, cabs_tot, csca_tot = np.loadtxt(namelist[k], unpack=True) 
+#     #we load in each file from namelist
+#     total_array[k,:,1] = np.interp(lam_final, lam, cabs_tot)
+#     total_array[k,:,2] = np.interp(lam_final, lam, csca_tot)
+#     #interpolate them within the range provided above
+#     h = open('tot array {}.txt'.format(k), 'w')
+#     for b in range(len(lam_final)):
+#         h.write(f"{total_array[k,b,0]} \t {total_array[k,b,1]} \t {total_array[k,b,2]} \n ")
+#     #outputs regridded array into file called 'tot array {k}'
 
 
 

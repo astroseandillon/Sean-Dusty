@@ -10,6 +10,7 @@ import os
 import numpy as np
 import scipy.integrate as spit
 import matplotlib.pyplot as plt
+import time
 dust_dir = ['/home/physics/Research/DUSTY/DUSTY/Lib_nk/', 
             "C:/UTSA/Research/DUSTY/DUSTY/Lib_nk/",
            "C:/Users/uhe082/OneDrive - University of Texas at San Antonio/Lib_nk"]
@@ -25,6 +26,30 @@ def bounds_l2(l1):
 
 
 def sigma(m, lamda, v):
+    '''
+    This is the absorption-scattering coefficient. 
+    
+    C_abs = sigma * C_sca
+    
+    sigma = (6pi / k^3 V)*Im(m^2) / abs(m^2 - 1)^2
+    
+    It is independent of the shape of the particle. 
+
+    Parameters
+    ----------
+    m : Complex
+        Complex index of refraction. m = n + ik
+    lamda : list
+        wavelength of associated m.
+    v : float
+        volume of sphere-equivalent particles.
+
+    Returns
+    -------
+    sig : list
+        wavelength-dependent scattering-absoprtion coefficient.
+
+    '''
     sig = []
     for i in range(len(lamda)):
         k = (2.0 * np.pi)/lamda[i]
@@ -126,7 +151,28 @@ def regrid_nk(fname, lam_start, lam_end, datapoints, gridtype):
     ret.close()
     return newarr
 
+def regrid_title(nk, n1, n2):
+    '''
+    returns the title of our new nk file that has been regridded
 
+    Parameters
+    ----------
+    nk : string - title of original nk file with .nk ending
+        DESCRIPTION.
+    n1 : float - low end of datarange
+        DESCRIPTION.
+    n2 : float - high end of datarange
+        DESCRIPTION.
+
+    Returns
+    -------
+    string - title of regridded nk dat
+
+    '''
+    s1 = str(n1).replace('.','_')
+    s2 = str(n2).replace('.','_')
+    fin_str = nk[:-4] + '_reg_{0}_{1}.nk'.format(s1,s2)
+    return fin_str
 
 def cabs(m, dis_name, bounds_l2, bounds_l1):
     cabs = []
@@ -148,38 +194,24 @@ def cabs(m, dis_name, bounds_l2, bounds_l1):
     return cabs
 
 
-# def cabs_all(dustlist):
-#     for j in range(len(dustlist)):
-#         pathy = os.path.join(nk_path, dustlist[j][0]) #pipeline is open
-#         wavelen, n_dust, k_dust = np.loadtxt(pathy, skiprows=7, unpack=True)
-#         m = np.array([complex(n_dust[i], k_dust[i]) for i in range(len(wavelen))])
-#         cab = cabs(m, dustlist[j][1], bounds_l2, bounds_l1)
-#         Cabs_array = np.array((cab))
-#         Cabs_array *= (2 * np.pi / (wavelen)) * v_avg
-#         sig = np.array((sigma(m, wavelen, v_avg)))
-#         Csca_array = Cabs_array/sig
-#         output = np.transpose((wavelen, Cabs_array, Csca_array))
-#         f = open(dustlist[j][0][:-3]+dustlist[j][1]+'.dat', 'w')
-#         for i in range(len(output)):
-#             f.write(f"{output[i,0]} \t {output[i,1]} \t {output[i,2]}\n")
-#         f.close()
 
 
-
-
-
-dustlist = [('sil-dlee.nk', 'spheres'), 
-            ('grph1-dl.nk', 'spheres'), 
-            ('grph2-dl.nk', 'spheres')]
+dustlist = [('Corundum.nk', 'CDE') 
+            ]
+#names of the dusts we will use. these are the initial names
 
 namelist = [dustlist[j][0][:-3]+dustlist[j][1]+'.dat' for j in range(len(dustlist))]
-# regriddust = np.ndarray((len(lam_final), 3))
+#names of the output files
 
 ### REGRID PARAMETERS
-lam_small = 0.002           #microns
+lam_small = 0.02           #microns
 lam_big = 500.0             #microns
-dpoints = 100               #number of datapoints
-gridscale = 'log'           #'log' or 'linear'
+dpoints = 1000               #number of datapoints
+gridscale = 'linear'           #'log' or 'linear'
+
+for i in range(len(dustlist)):
+    regrid_nk(nk_path+dustlist[i][0], lam_small, lam_big, dpoints, gridscale)
+    
 
 
 
@@ -190,44 +222,25 @@ gridscale = 'log'           #'log' or 'linear'
 
 
 
-weightlist = [53.0, 31.32, 15.66]
+
+
+
+reg_list = [regrid_title(nk_path+dustlist[j][0],lam_small,lam_big) for j in range(len(dustlist))]
+
+
+
+
+weightlist = [1.0]
 # do the regridding BEFORE calculating Cabs and csca!!!!!
 
 lam_final = np.geomspace(0.001, 1000, num=1200)
 # lam_final=wavelen
 
-
-
-total_array = np.ndarray((3,len(lam_final),len(dustlist)))
-total_array[:,:,0] = lam_final
-
-for k in range(len(namelist)):
-    lam, cabs_tot, csca_tot = np.loadtxt(namelist[k], unpack=True)
-    total_array[k,:,1] = np.interp(lam_final, lam, cabs_tot)
-    total_array[k,:,2] = np.interp(lam_final, lam, csca_tot)
-    h = open('tot array {}.txt'.format(k), 'w')
-    for b in range(len(lam_final)):
-        h.write(f"{total_array[k,b,0]} \t {total_array[k,b,1]} \t {total_array[k,b,2]} \n ")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+print('starting calculations')
+aaa = time.time()
 
 for j in range(len(dustlist)):
-    pathy = os.path.join(nk_path, dustlist[j][0]) #pipeline is open
+    pathy = os.path.join(nk_path, reg_list[j]) #pipeline is open
     print('path = ',pathy)
     wavelen, n_dust, k_dust = np.loadtxt(pathy, skiprows=7, unpack=True)
     # wavelen = 1e4/wavenum
@@ -252,38 +265,25 @@ for j in range(len(dustlist)):
     f.close()
     print('done with dust: ', pathy)
 
-lam_final = np.geomspace(0.001, 1000, num=1200)
-# lam_final=wavelen
-total_array = np.ndarray((3,len(lam_final),len(dustlist)))
-total_array[:,:,0] = lam_final
-
-for k in range(len(namelist)):
-    lam, cabs_tot, csca_tot = np.loadtxt(namelist[k], unpack=True)
-    total_array[k,:,1] = np.interp(lam_final, lam, cabs_tot)
-    total_array[k,:,2] = np.interp(lam_final, lam, csca_tot)
-    h = open('tot array {}.txt'.format(k), 'w')
-    for b in range(len(lam_final)):
-        h.write(f"{total_array[k,b,0]} \t {total_array[k,b,1]} \t {total_array[k,b,2]} \n ")
-
-h.close()
-
-avg_array = np.ndarray((len(lam_final),3))
-avg_array[:,0] = lam_final
-for j in range(len(lam_final)):
-    avg_array[j,1] = np.average(total_array[:,j,1], weights=weightlist)
-    avg_array[j,2] = np.average(total_array[:,j,2], weights=weightlist)
+# 
+# avg_array = np.ndarray((len(lam_final),3))
+# avg_array[:,0] = lam_final
+# for j in range(len(lam_final)):
+#     avg_array[j,1] = np.average(total_array[:,j,1], weights=weightlist)
+#     avg_array[j,2] = np.average(total_array[:,j,2], weights=weightlist)
 
     
 titlestring=''
 for g in range(len(namelist)):
     titlestring += namelist[g][:3] + str(weightlist[g]).replace('.','')
     
-f = open(titlestring+'.dat','w')
-for i in range(len(lam_final)):
-    f.write(f"{avg_array[i,0]} \t {avg_array[i,1]} \t {avg_array[i,2]}\n")
-f.close()   
+# f = open(titlestring+'.dat','w')
+# for i in range(len(lam_final)):
+#     f.write(f"{avg_array[i,0]} \t {avg_array[i,1]} \t {avg_array[i,2]}\n")
+# f.close()   
 
-
+bbb = time.time()
+print('This took {:.3f} seconds to run'.format(bbb-aaa))
 
 
 
