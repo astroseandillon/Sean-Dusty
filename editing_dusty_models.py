@@ -14,7 +14,7 @@ library_path = "C:/UTSA/Research/DUSTY/DUSTY/Sean_mod/Model_library/"
 # Update this for every new model you make. It will create a new folder in your 
 # library with a 4-digit model number. 
 
-directory = '9999'
+directory = '9000'
 
 pathy = os.path.join(library_path, directory)
 
@@ -45,8 +45,8 @@ dusty input!
 '''
 
 
-temperature = 3000
-Td = 1200
+temperature = 5000
+Td = 200
 abundance = 0.002, 0.013, 0.50, 0.03, 0.20,  0.007, 0.0
 shell_thickness = 1000.0
 op_prop_index = 3       #used for C_abs
