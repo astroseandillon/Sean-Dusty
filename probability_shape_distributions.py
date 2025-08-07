@@ -196,8 +196,7 @@ def cabs(m, dis_name, bounds_l2, bounds_l1):
 
 
 
-dustlist = [('sil-dlee.nk', 'CDE'),
-            ('grph1-dl.nk', 'CDE')
+dustlist = [('SiC-peg.nk', 'spheres')
             ]
 #names of the dusts we will use. these are the initial names
 
@@ -219,7 +218,7 @@ reg_list = [regrid_title(nk_path+dustlist[j][0],lam_small,lam_big) for j in rang
 
 
 
-weightlist = [1.0, 10.0]
+weightlist = [1.0]
 # do the regridding BEFORE calculating Cabs and csca!!!!!
 
 lam_final = np.geomspace(0.001, 1000, num=1200)
