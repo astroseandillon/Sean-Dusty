@@ -1,0 +1,17 @@
+ ==================================================
+ model   4  RUN-TIME MESSAGES 
+ --------------------------------------------------
+ ===========  STARTING SOLVE  ===========
+              1 . iteration over Fbol
+  Y grid generated, nY = 19
+                    nP = 71
+                  Nins =  2
+                  Ncav = 10
+  Single wavelength accuracy: 2.432E-02
+  Calculating weight matrices
+  Weight matrices OK, calculating Tdust
+  Convergence achieved, number of
+  iterations over energy density:   12
+  Flux conservation OK within: 4.2E-03
+  ==== SOLVE successfully completed =====
+  =======================================

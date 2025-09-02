@@ -1,0 +1,81 @@
+ ===========================
+  Output from program Dusty 
+  Version: 2.07
+ ===========================
+  
+  INPUT parameters from file:
+  Sean_mod/0080/sphere-1_0080.inp                                                                                                             
+  
+* ----------------------------------------------------------------------
+* NOTES:
+* This is a simple input file for a spherical shell with a minimal output
+* ----------------------------------------------------------------------
+  Central source spectrum described by a black body                       
+  with temperature: 2.900E+03 K
+  --------------------------------------------
+  Dust temperature on the inner boundary: 1.20E+03 K
+  --------------------------------------------
+  Abundances for supported grains:
+  Sil-Ow Sil-Oc Sil-DL grf-DL amC-Hn SiC-Pg
+  0.000  0.000  0.000  0.000  0.000  0.000
+  Abundances for user supplied grains:
+     1
+  1.000
+  User supplied n and k from:
+  1) Lib_nk\crbro300.nk                                                    
+  MRN size distribution:
+       Power q:  3.5
+  Minimal size: 5.00E-03 microns
+  Maximal size: 2.50E-01 microns
+  --------------------------------------------
+  Density described by 1/r**k with k =  2.0
+  Relative thickness: 1.000E+02
+  --------------------------------------------
+  Optical depths at 5.5E-01 microns
+  ranging from 1.00E-02 to 5.10E-01
+    6 models with linear grid                
+  Required accuracy: 5%
+  --------------------------------------------
+  --------------------------------------------
+  ====================================================  
+  For compliance with the point-source assumption, the
+  following results should only be applied to sources 
+  whose effective temperature exceeds 3502 K.
+  ====================================================
+          
+  RESULTS:
+  --------
+ ###   tau0   Fi(W/m2)  r1(cm)    r1/rc   theta1   Td(Y)   err 
+ ###     1        2        3        4        5       6      7  
+ ============================================================= 
+   1 1.00E-02 5.32E+05 7.59E+13 2.75E+00 5.66E-01 1.13E+02   0
+ ** WARNING: the input spectrum is a black-body at 2900 K **
+ *The point-source assumption requires min Teff of 3500 K **
+   2 1.10E-01 5.12E+05 7.73E+13 2.80E+00 5.77E-01 1.13E+02   0
+ ** WARNING: the input spectrum is a black-body at 2900 K **
+ *The point-source assumption requires min Teff of 3466 K **
+   3 2.10E-01 4.93E+05 7.88E+13 2.85E+00 5.88E-01 1.13E+02   0
+ ** WARNING: the input spectrum is a black-body at 2900 K **
+ *The point-source assumption requires min Teff of 3434 K **
+   4 3.10E-01 4.74E+05 8.03E+13 2.91E+00 5.99E-01 1.13E+02   0
+ ** WARNING: the input spectrum is a black-body at 2900 K **
+ *The point-source assumption requires min Teff of 3402 K **
+   5 4.10E-01 4.57E+05 8.18E+13 2.96E+00 6.10E-01 1.13E+02   0
+ ** WARNING: the input spectrum is a black-body at 2900 K **
+ *The point-source assumption requires min Teff of 3370 K **
+   6 5.10E-01 4.41E+05 8.33E+13 3.02E+00 6.21E-01 1.13E+02   0
+ ** WARNING: the input spectrum is a black-body at 2900 K **
+ *The point-source assumption requires min Teff of 3340 K **
+ =============================================================
+   (1) Optical depth at 5.5E-01 microns
+   (2) Bolometric flux at the inner radius 
+   (3) Inner radius for L=1E4 Lsun
+   (4) Ratio of the inner to the stellar radius
+   (5) Angular size (in arcsec) when Fbol=1E-6 W/m2
+   (6) Dust temperature at the outer edge (in K)
+   (7) Maximum error in flux conservation (%)
+ =================================================
+  Everything is OK for all models
+  Table with spectral properties is in file *.spp
+  Spectra are in files *.s##
+ ========== THE END ==============================

@@ -1,0 +1,23 @@
+ ==================================================
+ model   4  RUN-TIME MESSAGES 
+ --------------------------------------------------
+ ===========  STARTING SOLVE  ===========
+              1 . iteration over Fbol
+  Y grid generated, nY = 19
+                    nP = 71
+                  Nins =  2
+                  Ncav = 10
+  Grids need improvement:
+                    fTot(nY): 9.803E-01
+       Single wavelength TAU: 1.727E+01
+           Required accuracy: 5.000E-02
+  Single wavelength accuracy: 5.104E-02
+  Y grid improved, nY = 29
+  Calculating weight matrices
+  Weight matrices OK, calculating Tdust
+  Convergence achieved, number of
+  iterations over energy density:   12
+  Flux conservation OK within: 3.8E-03
+ Calculating intensities
+  ==== SOLVE successfully completed =====
+  =======================================

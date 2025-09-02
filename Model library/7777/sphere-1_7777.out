@@ -1,0 +1,36 @@
+ ===========================
+  Output from program Dusty 
+  Version: 2.07
+ ===========================
+  
+  INPUT parameters from file:
+  Sean_mod/Model_Library/7777/sphere-1_7777.inp                                                                                               
+  
+* ----------------------------------------------------------------------
+* NOTES:
+* This is a simple input file for a spherical shell with a minimal output
+* ----------------------------------------------------------------------
+  Central source spectrum described by a black body                       
+  with temperature: 2.000E+03 K
+  --------------------------------------------
+  Dust temperature on the inner boundary: 1.00E+03 K
+  --------------------------------------------
+  Optical properties from file(s):
+  look at this.dat                                                      
+  standard mrn mixture (a_min = 0.005, amax = 0.25)                               
+   amount of dusts and names go here                                              
+  --------------------------------------------
+  Density described by 1/r**k with k =  2.7
+  Relative thickness: 5.000E+01
+  --------------------------------------------
+  Optical depths at 5.5E-01 microns
+  ranging from 1.10E+00 to 2.00E+00
+    3 models with linear grid                
+  Required accuracy: 5%
+  --------------------------------------------
+  --------------------------------------------
+  ====================================================  
+  For compliance with the point-source assumption, the
+  following results should only be applied to sources 
+  whose effective temperature exceeds 4389 K.
+  ====================================================

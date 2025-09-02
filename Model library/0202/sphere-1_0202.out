@@ -1,0 +1,81 @@
+ ===========================
+  Output from program Dusty 
+  Version: 2.07
+ ===========================
+  
+  INPUT parameters from file:
+  Sean_mod/Model_Library/0202/sphere-1_0202.inp                                                                                               
+  
+* ----------------------------------------------------------------------
+* NOTES:
+* This is a simple input file for a spherical shell with a minimal output
+* ----------------------------------------------------------------------
+  Stellar spectrum supplied from file:
+  Mstar.dat                                                                                           
+  M Star Template	                                                                
+  Oxygen rich	                                                                    
+  --------------------------------------------
+  Dust temperature on the inner boundary: 1.50E+03 K
+  --------------------------------------------
+  Abundances for supported grains:
+  Sil-Ow Sil-Oc Sil-DL grf-DL amC-Hn SiC-Pg
+  0.187  0.000  0.000  0.000  0.000  0.000
+  Abundances for user supplied grains:
+     1      2      3      4      5      6      7
+  0.005  0.062  0.622  0.062  0.000  0.062  0.000
+  User supplied n and k from:
+  1) Lib_nk\Corundum.nk                                                    
+  2) Lib_nk\Mg2Fe8O.nk                                                     
+  3) Lib_nk\FeHofm.nk                                                      
+  4) Lib_nk\Al2O3-comp.nk                                                  
+  5) Lib_nk\cosmic_glass_20120815_DUSTY.nk                                 
+  6) Lib_nk\FeO.nk                                                         
+  7) Lib_nk\Mg1Fe9O.nk                                                     
+  MRN size distribution:
+       Power q:  3.5
+  Minimal size: 5.00E-03 microns
+  Maximal size: 2.50E-01 microns
+  --------------------------------------------
+  Density described by smooth power law
+   power   Ytransition
+   -------------------
+               1.0
+    1.8
+           5.000E+02
+    1.2
+           5.000E+03
+  --------------------------------------------
+  Optical depths at 5.5E-01 microns
+  ranging from 5.00E-01 to 1.00E+00
+    3 models with linear grid                
+  Required accuracy: 5%
+  --------------------------------------------
+  --------------------------------------------
+  ====================================================  
+  For compliance with the point-source assumption, the
+  following results should only be applied to sources 
+  whose effective temperature exceeds 3291 K.
+  ====================================================
+          
+  RESULTS:
+  --------
+ ###   tau0   Fi(W/m2)  r1(cm)    r1/rc   theta1   Td(Y)   err 
+ ###     1        2        3        4        5       6      7  
+ ============================================================= 
+   1 5.00E-01 3.90E+05 8.86E+13 3.82E+01 6.61E-01 5.25E+01   0
+   2 7.50E-01 3.78E+05 8.99E+13 3.87E+01 6.71E-01 5.17E+01   0
+   3 1.00E+00 3.68E+05 9.12E+13 3.93E+01 6.81E-01 5.10E+01   0
+ =============================================================
+   (1) Optical depth at 5.5E-01 microns
+   (2) Bolometric flux at the inner radius 
+   (3) Inner radius for L=1E4 Lsun
+   (4) Ratio of the inner to the stellar radius
+   (5) Angular size (in arcsec) when Fbol=1E-6 W/m2
+   (6) Dust temperature at the outer edge (in K)
+   (7) Maximum error in flux conservation (%)
+ =================================================
+  Everything is OK for all models
+  Table with spectral properties is in file *.spp
+  Spectra are in files *.s##
+  Radial profiles are in files *.r##
+ ========== THE END ==============================

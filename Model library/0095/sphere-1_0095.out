@@ -1,0 +1,70 @@
+ ===========================
+  Output from program Dusty 
+  Version: 2.07
+ ===========================
+  
+  INPUT parameters from file:
+  Sean_mod/0095/sphere-1_0095.inp                                                                                                             
+  
+* ----------------------------------------------------------------------
+* NOTES:
+* This is a simple input file for a spherical shell with a minimal output
+* ----------------------------------------------------------------------
+  Central source spectrum described by a black body                       
+  with temperature: 2.900E+03 K
+  --------------------------------------------
+  Dust temperature on the inner boundary: 1.20E+03 K
+  --------------------------------------------
+  Abundances for supported grains:
+  Sil-Ow Sil-Oc Sil-DL grf-DL amC-Hn SiC-Pg
+  0.000  0.000  0.000  0.000  0.000  0.000
+  Abundances for user supplied grains:
+     1      2
+  0.500  0.500
+  User supplied n and k from:
+  1) Lib_nk\cosmic_glass_20120815_DUSTY.nk                                 
+  2) Lib_nk\Al2O3-por.nk                                                   
+  MRN size distribution:
+       Power q:  3.5
+  Minimal size: 5.00E-03 microns
+  Maximal size: 2.50E-01 microns
+  --------------------------------------------
+  Density described by 1/r**k with k =  2.0
+  Relative thickness: 1.000E+02
+  --------------------------------------------
+  Optical depths at 5.5E-01 microns
+  ranging from 1.00E-02 to 5.10E-01
+    6 models with linear grid                
+  Required accuracy: 5%
+  --------------------------------------------
+  --------------------------------------------
+  ====================================================  
+  For compliance with the point-source assumption, the
+  following results should only be applied to sources 
+  whose effective temperature exceeds 2767 K.
+  ====================================================
+          
+  RESULTS:
+  --------
+ ###   tau0   Fi(W/m2)  r1(cm)    r1/rc   theta1   Td(Y)   err 
+ ###     1        2        3        4        5       6      7  
+ ============================================================= 
+   1 1.00E-02 2.08E+05 1.21E+14 4.40E+00 9.06E-01 1.27E+02   0
+   2 1.10E-01 2.05E+05 1.22E+14 4.43E+00 9.12E-01 1.27E+02   0
+   3 2.10E-01 2.02E+05 1.23E+14 4.46E+00 9.18E-01 1.26E+02   0
+   4 3.10E-01 1.99E+05 1.24E+14 4.49E+00 9.25E-01 1.26E+02   0
+   5 4.10E-01 1.96E+05 1.25E+14 4.52E+00 9.31E-01 1.25E+02   0
+   6 5.10E-01 1.94E+05 1.26E+14 4.55E+00 9.37E-01 1.25E+02   0
+ =============================================================
+   (1) Optical depth at 5.5E-01 microns
+   (2) Bolometric flux at the inner radius 
+   (3) Inner radius for L=1E4 Lsun
+   (4) Ratio of the inner to the stellar radius
+   (5) Angular size (in arcsec) when Fbol=1E-6 W/m2
+   (6) Dust temperature at the outer edge (in K)
+   (7) Maximum error in flux conservation (%)
+ =================================================
+  Everything is OK for all models
+  Table with spectral properties is in file *.spp
+  Spectra are in files *.s##
+ ========== THE END ==============================
