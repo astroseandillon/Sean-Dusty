@@ -112,7 +112,16 @@ q = 3.5
 
 r_integral = spit.quad(volume_integrand_mrn, rmin, rmax, args=q)
 r_average = ((1/(rmax - rmin)) * r_integral[0])**(1/-q)
+
+
+
 v_avg = (4./3.) * np.pi * r_average**3
+
+vol = (4./3.) * np.pi * 
+
+
+
+
 
 def regrid_nk(fname, lam_start, lam_end, datapoints, gridtype):
     '''
