@@ -17,14 +17,10 @@ plt.close('all')
 # from your filepath
 
 
-l = '0226'
+l = '0211'
 
+path = "/home/physics/Research/DUSTY/DUSTY/Sean_mod/Model_Library/{0}/sphere-1_{0}".format(l)
 
-path = "/home/physics/Research/DUSTY/DUSTY/Sean_mod/Sean-Dusty/Model library/{0}/sphere-1_{0}".format(l)
-# path = "/home/physics/Research/DUSTY/DUSTY/Sean_mod/Model_Library/{0}/sphere-1_{0}".format(l)
-# dust_dir = ['/home/physics/Research/DUSTY/DUSTY/Lib_nk/', 
-#             "C:/UTSA/Research/DUSTY/DUSTY/Lib_nk/",
-#            "C:/Users/uhe082/OneDrive - University of Texas at San Antonio/Lib_nk"]
 # These first few functions do all of the math stuff. 
 # The first one converts the magnitude into luminosity
 # the second one converts the terrible units of Janskys into useful units
