@@ -17,7 +17,7 @@ dust_dir = ['/home/physics/Research/DUSTY/DUSTY/Lib_nk/',
 # this is the possible locations of where dust can be
 
 
-nk_path = dust_dir[1]               #where the dust is 
+nk_path = dust_dir[0]               #where the dust is 
 def bounds_l1():
     return [0,1]
 
@@ -117,7 +117,7 @@ r_average = ((1/(rmax - rmin)) * r_integral[0])**(1/-q)
 
 v_avg = (4./3.) * np.pi * r_average**3
 
-vol = (4./3.) * np.pi * 
+# vol = (4./3.) * np.pi * 
 
 
 
@@ -205,7 +205,7 @@ def cabs(m, dis_name, bounds_l2, bounds_l1):
 
 
 
-dustlist = [('SiC-peg.nk', 'spheres')
+dustlist = [('Bohemite_mp-{}K.nk'.format(1473), 'CDE')
             ]
 #names of the dusts we will use. these are the initial names
 
