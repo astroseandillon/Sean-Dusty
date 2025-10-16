@@ -205,7 +205,7 @@ def cabs(m, dis_name, bounds_l2, bounds_l1):
 
 
 
-dustlist = [('Bohemite_mp-{}K.nk'.format(1473), 'CDE')
+dustlist = [('beta-SiC.nk', 'spheres')
             ]
 #names of the dusts we will use. these are the initial names
 
