@@ -42,8 +42,8 @@ def q_abs(r, m, lam):
 
 
 dname = ['beta-SiC.nk']
-lam, dust_n, dust_k = np.loadtxt(nk_path+dname[0], unpack=True)
-
+wavelen, n_dust, k_dust = np.loadtxt(nk_path+dname[0], unpack=True)
+m = np.array([complex(n_dust[i], k_dust[i]) for i in range(len(wavelen))])
 
 
 print('hello world')
