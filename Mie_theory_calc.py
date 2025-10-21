@@ -15,7 +15,7 @@ dust_dir = ['/home/physics/Research/DUSTY/DUSTY/Lib_nk/',
 # this is the possible locations of where dust can be
 
 
-nk_path = dust_dir[2]               #where the dust is 
+nk_path = dust_dir[1]               #where the dust is 
 
 def volume_integrand_mrn(r, q):
     v = r**(-q)
@@ -44,6 +44,20 @@ def q_abs(r, m, lam):
 dname = ['beta-SiC.nk']
 wavelen, n_dust, k_dust = np.loadtxt(nk_path+dname[0], unpack=True)
 m = np.array([complex(n_dust[i], k_dust[i]) for i in range(len(wavelen))])
+
+qabs_dust = q_abs(r_average, m, wavelen)
+qsca_dust = q_sca(r_average, m, wavelen)
+
+cabs_dust = np.pi * r_average * r_average * qabs_dust
+csca_dust = np.pi * r_average * r_average * qsca_dust
+
+output = np.transpose((wavelen, cabs_dust, csca_dust))
+
+f = open(dname[0][:-3]+'_mie.dat', 'w')
+for i in range(len(output)):
+    f.write(f"{output[i,0]} \t {output[i,1]} \t {output[i,2]}\n")
+f.close()
+
 
 
 print('hello world')
