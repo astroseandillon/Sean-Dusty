@@ -17,7 +17,7 @@ dust_dir = ['/home/physics/Research/DUSTY/DUSTY/Lib_nk/',
 # this is the possible locations of where dust can be
 
 
-nk_path = dust_dir[0]               #where the dust is 
+nk_path = dust_dir[1]               #where the dust is 
 def bounds_l1():
     return [0,1]
 
@@ -105,17 +105,18 @@ def volume_integrand_mrn(r, q):
     v = r**(-q)
     return v
 
-# UNITS ARE IN MICRONS
-rmin = 0.005
-rmax = 0.25
+# UNITS ARE IN CM
+rmin = 0.0000005
+rmax = 0.000025
 q = 3.5
 
+
 r_integral = spit.quad(volume_integrand_mrn, rmin, rmax, args=q)
-r_average = ((1/(rmax - rmin)) * r_integral[0])**(1/-q)
+# r_average = ((1/(rmax - rmin)) * r_integral[0])**(1/-q)
 
-
-
-v_avg = (4./3.) * np.pi * r_average**3
+r_average = 1e-1
+# UNITS ARE IN CM**3
+v_avg = (4./3.) * np.pi * r_average**3  
 
 # vol = (4./3.) * np.pi * 
 
@@ -145,6 +146,7 @@ def regrid_nk(fname, lam_start, lam_end, datapoints, gridtype):
 
     '''
     f, n, k = np.loadtxt(fname, skiprows=8 , unpack=True )
+    f *= 1e-4
     if gridtype == 'linear':
         grid = np.linspace(lam_start, lam_end, datapoints)
     elif gridtype == 'log':
@@ -213,8 +215,8 @@ namelist = [dustlist[j][0][:-3]+dustlist[j][1]+'.dat' for j in range(len(dustlis
 #names of the output files
 
 ### REGRID PARAMETERS
-lam_small = 0.02           #microns
-lam_big = 500.0             #microns
+lam_small = 0.000002           #cm
+lam_big = 0.0500             #cm
 dpoints = 1000               #number of datapoints
 gridscale = 'linear'           #'log' or 'linear'
 
@@ -230,7 +232,7 @@ reg_list = [regrid_title(nk_path+dustlist[j][0],lam_small,lam_big) for j in rang
 weightlist = [1.0]
 # do the regridding BEFORE calculating Cabs and csca!!!!!
 
-lam_final = np.geomspace(0.001, 1000, num=1200)
+# lam_final = np.geomspace(0.001, 1000, num=1200)
 # lam_final=wavelen
 
 print('starting calculations')
@@ -239,8 +241,7 @@ aaa = time.time()
 for j in range(len(dustlist)):
     pathy = os.path.join(nk_path, reg_list[j]) #pipeline is open
     print('path = ',pathy)
-    wavelen, n_dust, k_dust = np.loadtxt(pathy, skiprows=7, unpack=True)
-    # wavelen = 1e4/wavenum
+    wavelen, n_dust, k_dust = np.loadtxt(pathy, skiprows=7, unpack=True) #wavelen is in units of cm
     print(wavelen[0], ' ', n_dust[0], ' ', k_dust[0])
     m = np.array([complex(n_dust[i], k_dust[i]) for i in range(len(wavelen))])
     print('m = ',m[0])
@@ -248,11 +249,11 @@ for j in range(len(dustlist)):
     print('cab ',cab[0])
     Cabs_array = np.array((cab))
     print('cab array ', Cabs_array[0], ' of shape ', Cabs_array.shape)
-    Cabs_array *= (2 * np.pi / (wavelen)) * v_avg
+    Cabs_array *= (2 * np.pi / (wavelen)) * v_avg #Cabs array is now in units of cm**-2
     print('cab array 2pi/wavelength', Cabs_array[0])
-    sig = np.array((sigma(m, wavelen, v_avg)))
+    sig = np.array((sigma(m, wavelen, v_avg))) #sig is unitless
     print('sigma ',sig[0])
-    Csca_array = Cabs_array/sig
+    Csca_array = Cabs_array/sig #Csca is in units of cm**-2
     print('csca ',Csca_array[0])
     output = np.transpose((wavelen, Cabs_array, Csca_array))
     print('output ',output[0])
