@@ -17,10 +17,12 @@ plt.close('all')
 # from your filepath
 
 
-l = '0226'
+l = '001'
 
 
-path = "/home/physics/Research/DUSTY/DUSTY/Sean_mod/Sean-Dusty/Model library/{0}/sphere-1_{0}".format(l)
+# path = "/home/physics/Research/DUSTY/DUSTY/Sean_mod/Sean-Dusty/Model library/{0}/sphere-1_{0}".format(l)
+
+path = "C:/Users/uhe082/OneDrive - University of Texas at San Antonio (1)/Yulian Data/Model{0}/sphere1".format(l)
 # path = "/home/physics/Research/DUSTY/DUSTY/Sean_mod/Model_Library/{0}/sphere-1_{0}".format(l)
 # dust_dir = ['/home/physics/Research/DUSTY/DUSTY/Lib_nk/', 
 #             "C:/UTSA/Research/DUSTY/DUSTY/Lib_nk/",
@@ -260,41 +262,43 @@ axs["main"].plot(60, f60c, 'r', markersize=4, marker='.')
 axs["main"].plot(100, f100c, 'r', markersize=4, marker='.')
 '''
 fig,ax = plt.subplots()
-ax.set(xscale='log', yscale='log', xlim=(1,60), ylim=(1e-11, 1e-8))
+# ax.set(xscale='log', yscale='log', xlim=(1,60), ylim=(1e-11, 1e-8))
+ax.set(xscale='log', yscale='log')
+
 ax.set_title(m, fontsize=16)
 ax.set_xlabel(r'$\lambda (\mu m)$', fontsize=14)
 ax.set_ylabel(r'$\lambda$F$_{\lambda}$', fontsize=14)
 
-ax.vlines(4.6, 1e-11, 1e-9, color='b')
-ax.annotate('CO',
-    xy=(4.6, 1e-9), xycoords='data',
-    xytext=(4.0, 7e-9), textcoords='data',
-    arrowprops=dict(arrowstyle="->"), color='b')
+# ax.vlines(4.6, 1e-11, 1e-9, color='b')
+# ax.annotate('CO',
+#     xy=(4.6, 1e-9), xycoords='data',
+#     xytext=(4.0, 7e-9), textcoords='data',
+#     arrowprops=dict(arrowstyle="->"), color='b')
 
-ax.vlines(6.6, 1e-11, 1e-9, color='c')
-ax.annotate('H2O',
-    xy=(6.6, 1e-9), xycoords='data',
-    xytext=(5.3, 7e-9), textcoords='data',
-    arrowprops=dict(arrowstyle="->"), color='c')
+# ax.vlines(6.6, 1e-11, 1e-9, color='c')
+# ax.annotate('H2O',
+#     xy=(6.6, 1e-9), xycoords='data',
+#     xytext=(5.3, 7e-9), textcoords='data',
+#     arrowprops=dict(arrowstyle="->"), color='c')
 
-ax.vlines(8.1, 1e-11, 1e-9, color='g')
-ax.annotate('SiO',
-    xy=(8.1, 1e-9), xycoords='data',
-    xytext=(8.1, 7e-9), textcoords='data',
-    arrowprops=dict(arrowstyle="->"), color='g')
+# ax.vlines(8.1, 1e-11, 1e-9, color='g')
+# ax.annotate('SiO',
+#     xy=(8.1, 1e-9), xycoords='data',
+#     xytext=(8.1, 7e-9), textcoords='data',
+#     arrowprops=dict(arrowstyle="->"), color='g')
 
-ax.plot(iras_wvlnth_micron, iras_lamdaF_lamda, 'yo', markersize=2,label='IRAS')
+# ax.plot(iras_wvlnth_micron, iras_lamdaF_lamda, 'yo', markersize=2,label='IRAS')
 ax.plot(model_lamda2, f_tot_norm2, 'k', label='DUSTY')
-ax.plot(iso_wvlnth, iso_flux_Wm2, 'mo', markersize=2, label='ISO')
-ax.plot(B_lam, B_lamflam, 'g', markersize=4, marker='.', label='BVJHK')
-ax.plot(V_lam, V_lamflam, 'g', markersize=4, marker='.')
-ax.plot(J_lam, J_lamflam, 'g', markersize=4, marker='.')
-ax.plot(H_lam, H_lamflam, 'g', markersize=4, marker='.')
-ax.plot(K_lam, K_lamflam, 'g', markersize=4, marker='.')
-ax.plot(12, f12c, 'r', markersize=4, marker='.', label="ISO Photometric")
-ax.plot(25, f25c, 'r', markersize=4, marker='.')
-ax.plot(60, f60c, 'r', markersize=4, marker='.')
-ax.plot(100, f100c, 'r', markersize=4, marker='.')
+# ax.plot(iso_wvlnth, iso_flux_Wm2, 'mo', markersize=2, label='ISO')
+# ax.plot(B_lam, B_lamflam, 'g', markersize=4, marker='.', label='BVJHK')
+# ax.plot(V_lam, V_lamflam, 'g', markersize=4, marker='.')
+# ax.plot(J_lam, J_lamflam, 'g', markersize=4, marker='.')
+# ax.plot(H_lam, H_lamflam, 'g', markersize=4, marker='.')
+# ax.plot(K_lam, K_lamflam, 'g', markersize=4, marker='.')
+# ax.plot(12, f12c, 'r', markersize=4, marker='.', label="ISO Photometric")
+# ax.plot(25, f25c, 'r', markersize=4, marker='.')
+# ax.plot(60, f60c, 'r', markersize=4, marker='.')
+# ax.plot(100, f100c, 'r', markersize=4, marker='.')
 ax.legend()
 # axs["zoom1"].plot(iras_wvlnth_micron, iras_lamdaF_lamda, 'yo', markersize=2,)
 # axs["zoom1"].plot(iso_wvlnth, iso_flux_Wm2, 'mo', markersize=2,)
