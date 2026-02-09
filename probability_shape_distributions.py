@@ -17,7 +17,7 @@ dust_dir = ['/home/physics/Research/DUSTY/DUSTY/Lib_nk/',
 # this is the possible locations of where dust can be
 
 
-nk_path = dust_dir[1]               #where the dust is 
+nk_path = dust_dir[0]               #where the dust is 
 def bounds_l1():
     return [0,1]
 
@@ -112,9 +112,9 @@ q = 3.5
 
 
 r_integral = spit.quad(volume_integrand_mrn, rmin, rmax, args=q)
-# r_average = ((1/(rmax - rmin)) * r_integral[0])**(1/-q)
+r_average = ((1/(rmax - rmin)) * r_integral[0])**(1/-q)
 
-r_average = 1e-1
+# r_average = 1e-1
 # UNITS ARE IN CM**3
 v_avg = (4./3.) * np.pi * r_average**3  
 
@@ -207,7 +207,7 @@ def cabs(m, dis_name, bounds_l2, bounds_l1):
 
 
 
-dustlist = [('beta-SiC.nk', 'spheres')
+dustlist = [('cosmic_glass_20120815_DUSTY.nk', 'CDE')
             ]
 #names of the dusts we will use. these are the initial names
 
