@@ -9,15 +9,15 @@ Created on Mon Sep 23 10:17:26 2024
 import os
 import numpy as np
 import scipy.integrate as spit
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import time
 dust_dir = ['/home/physics/Research/DUSTY/DUSTY/Lib_nk/', 
             "C:/UTSA/Research/DUSTY/DUSTY/Lib_nk/",
-           "C:/Users/uhe082/OneDrive - University of Texas at San Antonio/Lib_nk"]
+           "C:/Users/uhe082/OneDrive - University of Texas at San Antonio (1)/Lib_nk/"]
 # this is the possible locations of where dust can be
 
 
-nk_path = dust_dir[0]               #where the dust is 
+nk_path = dust_dir[-1]               #where the dust is 
 def bounds_l1():
     return [0,1]
 
@@ -109,23 +109,23 @@ def volume_integrand_kmh(r, q, a0):
     k = r**(-q) * np.exp(-r/a0)
     return k
 
+def v_avg(distribution, rmin, rmax, q, a0=0.2):
+    if distribution == "MRN":
+        r_int = spit.quad(volume_integrand_mrn, rmin, rmax, args=q)
+    elif distribution == "KMH":
+        r_int = spit.quad(volume_integrand_kmh, rmin, rmax, args=(q, a0))
+    else: 
+        return (4./3.) * np.pi * ((rmin + rmax)/2)**3
+    r_average = ((1/(rmax - rmin)) * r_int[0])**(1/-q)
+    volume = (4./3.) * np.pi * r_average**3  
+    return volume
+
+
+# Dust size parameters
 # UNITS ARE IN CM
 rmin = 0.0000005
 rmax = 0.000025
 q = 3.5
-
-
-r_integral = spit.quad(volume_integrand_mrn, rmin, rmax, args=q)
-r_average = ((1/(rmax - rmin)) * r_integral[0])**(1/-q)
-
-# r_average = 1e-1
-# UNITS ARE IN CM**3
-v_avg = (4./3.) * np.pi * r_average**3  
-
-# vol = (4./3.) * np.pi * 
-
-
-
 
 
 def regrid_nk(fname, lam_start, lam_end, datapoints, gridtype):
@@ -215,8 +215,10 @@ dustlist = [('cosmic_glass_20120815_DUSTY.nk', 'CDE', 'MRN')
             ]
 #names of the dusts we will use. these are the initial names
 
-namelist = [dustlist[j][0][:-3]+dustlist[j][1]+'.dat' for j in range(len(dustlist))]
+namelist = [dustlist[j][0][:-3]+'_'+dustlist[j][1]+'_'+dustlist[j][2]+'.dat' for j in range(len(dustlist))]
 #names of the output files
+
+
 
 ### REGRID PARAMETERS
 lam_small = 0.000002           #cm
@@ -230,9 +232,6 @@ for i in range(len(dustlist)):
 
 reg_list = [regrid_title(nk_path+dustlist[j][0],lam_small,lam_big) for j in range(len(dustlist))]
 
-
-
-
 weightlist = [1.0]
 # do the regridding BEFORE calculating Cabs and csca!!!!!
 
@@ -245,6 +244,10 @@ aaa = time.time()
 for j in range(len(dustlist)):
     pathy = os.path.join(nk_path, reg_list[j]) #pipeline is open
     print('path = ',pathy)
+    vavg = v_avg(dustlist[j][2], rmin, rmax, q)
+    print('average volume for {} distribution '.format(dustlist[j][2]), vavg)
+    print('rmin ', rmin)
+    print('rmax ', rmax)
     wavelen, n_dust, k_dust = np.loadtxt(pathy, skiprows=7, unpack=True) #wavelen is in units of cm
     print(wavelen[0], ' ', n_dust[0], ' ', k_dust[0])
     m = np.array([complex(n_dust[i], k_dust[i]) for i in range(len(wavelen))])
@@ -253,9 +256,9 @@ for j in range(len(dustlist)):
     print('cab ',cab[0])
     Cabs_array = np.array((cab))
     print('cab array ', Cabs_array[0], ' of shape ', Cabs_array.shape)
-    Cabs_array *= (2 * np.pi / (wavelen)) * v_avg #Cabs array is now in units of cm**-2
+    Cabs_array *= (2 * np.pi / (wavelen)) * vavg #Cabs array is now in units of cm**-2
     print('cab array 2pi/wavelength', Cabs_array[0])
-    sig = np.array((sigma(m, wavelen, v_avg))) #sig is unitless
+    sig = np.array((sigma(m, wavelen, vavg))) #sig is unitless
     print('sigma ',sig[0])
     Csca_array = Cabs_array/sig #Csca is in units of cm**-2
     print('csca ',Csca_array[0])

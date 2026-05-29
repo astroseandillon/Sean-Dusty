@@ -8,9 +8,39 @@ Created on Tue May 21 15:06:56 2024
 
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy.integrate as spit
 import os
 
 plt.close('all')
+
+
+def volume_integrand_mrn(r, q):
+    v = r**(-q)
+    return v
+
+def volume_integrand_kmh(r, q, a0):
+    k = r**(-q) * np.exp(-r/a0)
+    return k
+
+def v_avg(distribution, rmin, rmax, q, a0=0.2):
+    if distribution == "MRN":
+        r_int = spit.quad(volume_integrand_mrn, rmin, rmax, args=q)
+    elif distribution == "KMH":
+        r_int = spit.quad(volume_integrand_kmh, rmin, rmax, args=(q, a0))
+    else: 
+        return (4./3.) * np.pi * ((rmin + rmax)/2)**3
+    r_average = ((1/(rmax - rmin)) * r_int[0])**(1/-q)
+    volume = (4./3.) * np.pi * r_average**3  
+    return volume
+
+
+
+
+
+
+
+
+
 
 
 # def nk_unit_checker(filename):
