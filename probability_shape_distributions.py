@@ -105,6 +105,10 @@ def volume_integrand_mrn(r, q):
     v = r**(-q)
     return v
 
+def volume_integrand_kmh(r, q, a0):
+    k = r**(-q) * np.exp(-r/a0)
+    return k
+
 # UNITS ARE IN CM
 rmin = 0.0000005
 rmax = 0.000025
@@ -207,7 +211,7 @@ def cabs(m, dis_name, bounds_l2, bounds_l1):
 
 
 
-dustlist = [('cosmic_glass_20120815_DUSTY.nk', 'CDE')
+dustlist = [('cosmic_glass_20120815_DUSTY.nk', 'CDE', 'MRN')
             ]
 #names of the dusts we will use. these are the initial names
 

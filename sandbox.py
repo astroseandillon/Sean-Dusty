@@ -51,72 +51,72 @@ plt.close('all')
 # h.close()
 
 
-def regrid_nk(fname, lam_start, lam_end, datapoints, gridtype):
-    '''
-    regrids nk files into different wavelength ranges
+# def regrid_nk(fname, lam_start, lam_end, datapoints, gridtype):
+#     '''
+#     regrids nk files into different wavelength ranges
 
-    Parameters
-    ----------
-    fname : String - name of the file with dustgrains
+#     Parameters
+#     ----------
+#     fname : String - name of the file with dustgrains
     
-    lam_start : float - smallest wavelength (in microns)
+#     lam_start : float - smallest wavelength (in microns)
     
-    lam_end : float - largest wavelength (in microns)
+#     lam_end : float - largest wavelength (in microns)
     
-    datapoints : int - number of data points used 
+#     datapoints : int - number of data points used 
     
-    gridtype : string - What type of grid we want to use
+#     gridtype : string - What type of grid we want to use
 
-    Returns
-    -------
-    array with optical constants at given wavelength range
+#     Returns
+#     -------
+#     array with optical constants at given wavelength range
 
-    '''
-    f, n, k = np.loadtxt(fname, skiprows=8 , unpack=True )
-    if gridtype == 'linear':
-        grid = np.linspace(lam_start, lam_end, datapoints)
-    elif gridtype == 'log':
-        grid = np.geomspace(lam_start, lam_end, datapoints)
-    newarr = np.ndarray((datapoints, 3))
-    newarr[:,0] = grid
-    newarr[:,1] = np.interp(grid, f, n)
-    newarr[:,2] = np.interp(grid, f, k)
-    ret = open(fname[:-4] + '_reg_{0}_{1}.nk'.format(str(lam_start).replace('.','_'), 
-                                                  str(lam_end).replace('.','_')), 'w')
-    for b in range(datapoints):
-        ret.write(f"{newarr[b,0]} \t {newarr[b,1]} \t {newarr[b,2]} \n ")
-    ret.close()
-    return newarr
+#     '''
+#     f, n, k = np.loadtxt(fname, skiprows=8 , unpack=True )
+#     if gridtype == 'linear':
+#         grid = np.linspace(lam_start, lam_end, datapoints)
+#     elif gridtype == 'log':
+#         grid = np.geomspace(lam_start, lam_end, datapoints)
+#     newarr = np.ndarray((datapoints, 3))
+#     newarr[:,0] = grid
+#     newarr[:,1] = np.interp(grid, f, n)
+#     newarr[:,2] = np.interp(grid, f, k)
+#     ret = open(fname[:-4] + '_reg_{0}_{1}.nk'.format(str(lam_start).replace('.','_'), 
+#                                                   str(lam_end).replace('.','_')), 'w')
+#     for b in range(datapoints):
+#         ret.write(f"{newarr[b,0]} \t {newarr[b,1]} \t {newarr[b,2]} \n ")
+#     ret.close()
+#     return newarr
 
         
 
-def regrid_title(nk, n1, n2):
-    '''
-    returns the title of our new nk file that has been regridded
+# def regrid_title(nk, n1, n2):
+#     '''
+#     returns the title of our new nk file that has been regridded
 
-    Parameters
-    ----------
-    nk : string - title of original nk file with .nk ending
-        DESCRIPTION.
-    n1 : float - low end of datarange
-        DESCRIPTION.
-    n2 : float - high end of datarange
-        DESCRIPTION.
+#     Parameters
+#     ----------
+#     nk : string - title of original nk file with .nk ending
+#         DESCRIPTION.
+#     n1 : float - low end of datarange
+#         DESCRIPTION.
+#     n2 : float - high end of datarange
+#         DESCRIPTION.
 
-    Returns
-    -------
-    string - title of regridded nk dat
+#     Returns
+#     -------
+#     string - title of regridded nk dat
 
-    '''
-    s1 = str(n1).replace('.','_')
-    s2 = str(n2).replace('.','_')
-    fin_str = nk[:-3] + '_reg_{0}_{1}.nk'.format(s1,s2)
-    return fin_str
+#     '''
+#     s1 = str(n1).replace('.','_')
+#     s2 = str(n2).replace('.','_')
+#     fin_str = nk[:-3] + '_reg_{0}_{1}.nk'.format(s1,s2)
+#     return fin_str
     
 
-dustlist = [('sil-dlee.nk', 'spheres'), 
-            ('grph1-dl.nk', 'spheres'), 
-            ('grph2-dl.nk', 'spheres')]
+# dustlist = [('sil-dlee.nk', 'spheres'), 
+#             ('grph1-dl.nk', 'spheres'), 
+#             ('grph2-dl.nk', 'spheres')]
 
 
 # def kmh(r, a0):
