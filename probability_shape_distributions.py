@@ -126,7 +126,7 @@ def v_avg(distribution, rmin, rmax, q, a0=0.2):
 rmin = 0.0000005
 rmax = 0.000025
 q = 3.5
-
+a0 = 0.1 
 
 def regrid_nk(fname, lam_start, lam_end, datapoints, gridtype):
     '''
@@ -211,7 +211,9 @@ def cabs(m, dis_name, bounds_l2, bounds_l1):
 
 
 
-dustlist = [('cosmic_glass_20120815_DUSTY.nk', 'CDE', 'MRN')
+dustlist = [('cosmic_glass_20120815_DUSTY.nk', 'CDE', 'MRN'),
+            ('cosmic_glass_20120815_DUSTY.nk', 'CDE', 'single'),
+            ('cosmic_glass_20120815_DUSTY.nk', 'CDE', 'KMH'),
             ]
 #names of the dusts we will use. these are the initial names
 
