@@ -264,7 +264,7 @@ for j in range(len(dustlist)):
     print('csca ',Csca_array[0])
     output = np.transpose((wavelen, Cabs_array, Csca_array))
     print('output ',output[0])
-    f = open(dustlist[j][0][:-3]+dustlist[j][1]+'.dat', 'w')
+    f = open(dustlist[j][0][:-3]+dustlist[j][1]+'_'+dustlist[j][2]+'.dat', 'w')
     for i in range(len(output)):
         f.write(f"{output[i,0]} \t {output[i,1]} \t {output[i,2]}\n")
     f.close()
@@ -278,9 +278,9 @@ for j in range(len(dustlist)):
 #     avg_array[j,2] = np.average(total_array[:,j,2], weights=weightlist)
 
     
-titlestring=''
-for g in range(len(namelist)):
-    titlestring += namelist[g][:3] + str(weightlist[g]).replace('.','')
+# titlestring=''
+# for g in range(len(namelist)):
+#     titlestring += namelist[g][:3] + str(weightlist[g]).replace('.','')
     
 # f = open(titlestring+'.dat','w')
 # for i in range(len(lam_final)):
