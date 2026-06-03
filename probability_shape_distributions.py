@@ -123,8 +123,8 @@ def v_avg(distribution, rmin, rmax, q, a0=0.2):
 
 # Dust size parameters
 # UNITS ARE IN CM
-rmin = 0.0000005
-rmax = 0.000025
+rmin = 0.0001
+rmax = 0.0001
 q = 3.5
 a0 = 0.1 
 
@@ -211,9 +211,7 @@ def cabs(m, dis_name, bounds_l2, bounds_l1):
 
 
 
-dustlist = [('cosmic_glass_20120815_DUSTY.nk', 'CDE', 'MRN'),
-            ('cosmic_glass_20120815_DUSTY.nk', 'CDE', 'single'),
-            ('cosmic_glass_20120815_DUSTY.nk', 'CDE', 'KMH'),
+dustlist = [('beta-SiC.nk', 'CDE', 'single'),
             ]
 #names of the dusts we will use. these are the initial names
 
