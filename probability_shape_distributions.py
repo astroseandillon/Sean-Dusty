@@ -246,7 +246,7 @@ aaa = time.time()
 for j in range(len(dustlist)):
     pathy = os.path.join(nk_path, reg_list[j]) #pipeline is open
     print('path = ',pathy)
-    vavg = v_avg(dustlist[j][2], rmin, rmax, q)
+    vavg = v_avg(dustlist[j][2], rmin, rmax, q, a0)
     print('average volume for {} distribution '.format(dustlist[j][2]), vavg)
     print('rmin ', rmin)
     print('rmax ', rmax)
