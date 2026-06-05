@@ -211,9 +211,22 @@ def cabs(m, dis_name, bounds_l2, bounds_l1):
 
 
 
-dustlist = [('beta-SiC.nk', 'CDE', 'single'),
+dustlist = [('beta-SiC.nk', 'CDE', 'single', 0.0001, 0.0001, 3.5, 0.1),
             ]
 #names of the dusts we will use. these are the initial names
+# SYNTAX
+# dustlist takes in each dust as a tuple with the properties
+# 0. string with .nk file name
+# 1. shape distribution
+# 2. size distribution
+# 3. minimum dust radius size in cm
+# 4. maximum dust radius size in cm
+# 5. exponent for size distribution
+# 6. exponential cutoff for kmh distribution
+
+
+
+
 
 namelist = [dustlist[j][0][:-3]+'_'+dustlist[j][1]+'_'+dustlist[j][2]+'.dat' for j in range(len(dustlist))]
 #names of the output files
@@ -244,10 +257,10 @@ aaa = time.time()
 for j in range(len(dustlist)):
     pathy = os.path.join(nk_path, reg_list[j]) #pipeline is open
     print('path = ',pathy)
-    vavg = v_avg(dustlist[j][2], rmin, rmax, q, a0)
+    vavg = v_avg(dustlist[j][2], dustlist[j][3], dustlist[j][4], dustlist[j][5], dustlist[j][6])
     print('average volume for {} distribution '.format(dustlist[j][2]), vavg)
-    print('rmin ', rmin)
-    print('rmax ', rmax)
+    print('rmin ', dustlist[j][3])
+    print('rmax ', dustlist[j][4])
     wavelen, n_dust, k_dust = np.loadtxt(pathy, skiprows=7, unpack=True) #wavelen is in units of cm
     print(wavelen[0], ' ', n_dust[0], ' ', k_dust[0])
     m = np.array([complex(n_dust[i], k_dust[i]) for i in range(len(wavelen))])
