@@ -1,0 +1,24 @@
+SiC - Corman
+ungraphed version:
+'pegourie_spher_SiC.csv' 
+'pegourie_cde_SiC.csv'
+notes: 
+-Dust was first analyzed by Pegourie, is called Corman because Corman studied it in his thesis.
+
+Corundum - Depew
+ungraphed version:
+'Corundum_cde_depewversion.dat'
+notes:
+
+Olivine - Fabian
+ungraphed version:
+'cde1_fab01_fig7_olivine.csv'
+notes: 
+-given in terms of kappa, which is Cabs/(vavg*rho)
+
+beta-SiC
+ungraphed version: 
+'beta_SiC_CDE_corman_1size_cabs.csv'
+notes:
+-wavelength is given in microns, convert to cm
+-absorption efficiencies

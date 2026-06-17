@@ -211,7 +211,9 @@ def cabs(m, dis_name, bounds_l2, bounds_l1):
 
 
 
-dustlist = [('beta-SiC.nk', 'CDE', 'single', 0.0001, 0.0001, 3.5, 0.1),
+dustlist = [('oliv_nk_x.nk', 'CDE', 'single', 0.0001, 0.0001, 3.5, 0.1),
+            ('oliv_nk_y.nk', 'CDE', 'single', 0.0001, 0.0001, 3.5, 0.1),
+            ('oliv_nk_z.nk', 'CDE', 'single', 0.0001, 0.0001, 3.5, 0.1),
             ]
 #names of the dusts we will use. these are the initial names
 # SYNTAX
@@ -234,8 +236,8 @@ namelist = [dustlist[j][0][:-3]+'_'+dustlist[j][1]+'_'+dustlist[j][2]+'.dat' for
 
 
 ### REGRID PARAMETERS
-lam_small = 0.000002           #cm
-lam_big = 0.0500             #cm
+lam_small = 0.00002           #cm
+lam_big = 0.00500             #cm
 dpoints = 1000               #number of datapoints
 gridscale = 'linear'           #'log' or 'linear'
 
@@ -245,7 +247,7 @@ for i in range(len(dustlist)):
 
 reg_list = [regrid_title(nk_path+dustlist[j][0],lam_small,lam_big) for j in range(len(dustlist))]
 
-weightlist = [1.0]
+weightlist = [1.0, 1.0, 1.0]
 # do the regridding BEFORE calculating Cabs and csca!!!!!
 
 # lam_final = np.geomspace(0.001, 1000, num=1200)
@@ -269,11 +271,11 @@ for j in range(len(dustlist)):
     print('cab ',cab[0])
     Cabs_array = np.array((cab))
     print('cab array ', Cabs_array[0], ' of shape ', Cabs_array.shape)
-    Cabs_array *= (2 * np.pi / (wavelen)) * vavg #Cabs array is now in units of cm**-2
+    Cabs_array *= (2 * np.pi / (wavelen)) * vavg #Cabs array is now in units of cm**2
     print('cab array 2pi/wavelength', Cabs_array[0])
     sig = np.array((sigma(m, wavelen, vavg))) #sig is unitless
     print('sigma ',sig[0])
-    Csca_array = Cabs_array/sig #Csca is in units of cm**-2
+    Csca_array = Cabs_array/sig #Csca is in units of cm**2
     print('csca ',Csca_array[0])
     output = np.transpose((wavelen, Cabs_array, Csca_array))
     print('output ',output[0])
