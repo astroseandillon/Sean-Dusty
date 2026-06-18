@@ -186,7 +186,7 @@ def regrid_title(nk, n1, n2):
     '''
     s1 = str(n1).replace('.','_')
     s2 = str(n2).replace('.','_')
-    fin_str = nk[:-4] + '_reg_{0}_{1}.nk'.format(s1,s2)
+    fin_str = nk[:-3] + '_reg_{0}_{1}.nk'.format(s1,s2)
     return fin_str
 
 def cabs(m, dis_name, bounds_l2, bounds_l1):
