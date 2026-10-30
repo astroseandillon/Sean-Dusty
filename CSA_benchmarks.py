@@ -17,10 +17,11 @@ import os
 plt.close('all')
 
 dust_dir = ['/home/physics/Research/DUSTY/DUSTY/Lib_nk/', 
-            "C:/UTSA/Research/DUSTY/DUSTY/Lib_nk/"]
+            "C:/UTSA/Research/DUSTY/DUSTY/Lib_nk/",
+            "C:/Users/e118697/Lib_nk/"]
 
 
-nk_path = dust_dir[1]               #where the dust is 
+nk_path = dust_dir[-1]               #where the dust is 
 dust = 'oliv_nk_y.nk'               #DUST NAME HERE
 rho = 3.33 #grams cm**-3            #density
 pathy = os.path.join(nk_path, dust) #pipeline is open
